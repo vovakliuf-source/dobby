@@ -14,6 +14,7 @@ const hpp = require('hpp');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 dotenv.config({ path: './config/config.env' });
 
@@ -38,7 +39,6 @@ app.use((req, res, next) => {
 
 app.use(cors());
 app.use(helmet());
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
@@ -58,6 +58,7 @@ const jobsRouter = require('./routes/jobRouter');
 const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', authRouter);
 app.use('/api/v1', jobsRouter);
 app.use('/api/v1', userRouter);
