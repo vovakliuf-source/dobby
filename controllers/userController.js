@@ -37,7 +37,7 @@ exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
     sendTokenResponse(userProfile, 200, res);
 })
 
-exports.updateUserProfile = catchAsyncErrors(async (req, res, next) => {
+exports.updateUserProfile = catchAsyncErrors(async (req, res) => {
     const newUserData = {
         name: req.body.name,
         email: req.body.email,
@@ -78,7 +78,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-exports.getAppliedJobs = catchAsyncErrors(async (req, res, next) => {
+exports.getAppliedJobs = catchAsyncErrors(async (req, res) => {
     const userId = req.user.id;
     const appliedJobs = await Job.find({ 'applicantsApplied.user': userId }).select('+applicantsApplied');
 
@@ -102,7 +102,7 @@ exports.getAppliedJobs = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-exports.getPublishedJobs = catchAsyncErrors(async (req, res, next) => {
+exports.getPublishedJobs = catchAsyncErrors(async (req, res) => {
     const userId = req.user.id;
     const publishedJobs = await Job.find({ user: userId });
 
@@ -113,7 +113,7 @@ exports.getPublishedJobs = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
-exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+exports.getAllUsers = catchAsyncErrors(async (req, res) => {
     const apiFilters = new ApiFilters(user.find(), req.query)
         .filter()
         .sort()

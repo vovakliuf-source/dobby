@@ -24,8 +24,6 @@ exports.registerUser = catchAsync(async (req, res) => {
       role,
     });
 
-    const token = await user.getJwtToken();
-
     sendTokenResponse(user, 201, res);
 });
 
@@ -44,12 +42,10 @@ exports.loginUser = catchAsync(async (req, res, next) => {
       return next(new ErrorHandler('Invalid credentials', 400));
     }
 
-    const token = await user.getJwtToken();
-
     sendTokenResponse(user, 200, res);
 });
 
-exports.logoutUser = catchAsync(async (req, res, next) => {
+exports.logoutUser = catchAsync(async (req, res,) => {
   res.cookie('token', 'none', {
     expires: new Date(Date.now()),
     httpOnly: true,

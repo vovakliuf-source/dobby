@@ -7,7 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Get all jobs
-exports.getJobs = CatchAsyncErrors(async (req, res, next) => {
+exports.getJobs = CatchAsyncErrors(async (req, res) => {
     const apiFilters = new ApiFilters(Job.find(), req.query).filter().sort().limitFields().searchByQuery().paginate();
     const jobs = await apiFilters.query;
 
@@ -20,7 +20,7 @@ exports.getJobs = CatchAsyncErrors(async (req, res, next) => {
 })
 // Create new job
 // CatchAsyncErrors is useless code works fine without it.
-exports.newJob = CatchAsyncErrors(async (req, res, next) => {
+exports.newJob = CatchAsyncErrors(async (req, res) => {
     const job = await new Job({ ...req.body, user: req.user.id });
     const savedJob = await job.save();
 
@@ -31,7 +31,7 @@ exports.newJob = CatchAsyncErrors(async (req, res, next) => {
     });
 })
 // Get jobs within a radius
-exports.getJobInRadius = CatchAsyncErrors(async (req, res, next) => {
+exports.getJobInRadius = CatchAsyncErrors(async (req, res) => {
     const { zipcode, distance } = req.params;
     const loc = await geocoder.geocode(zipcode);
     const lat = loc[0].latitude;
@@ -120,7 +120,7 @@ exports.getJob = CatchAsyncErrors(async (req, res, next) => {
     });
 })
 
-exports.getStats = CatchAsyncErrors(async (req, res, next) => {
+exports.getStats = CatchAsyncErrors(async (req, res) => {
     const stats = await Job.aggregate([
         {
             $match: { $text: { $search: req.params.topic } }
