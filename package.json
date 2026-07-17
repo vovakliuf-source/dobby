@@ -10,9 +10,9 @@
     "start": "NODE_ENV=production node app.js",
     "dev": "NODE_ENV=development nodemon app.js",
     "production": "NODE_ENV=production node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint:fix": "eslint . --fix",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:watch": "jest --watchAll --detectOpenHandles"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -35,9 +35,16 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
     "@eslint/js": "^10.0.1",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.4.1",
     "eslint": "^10.5.0",
     "globals": "^17.6.0",
-    "nodemon": "^3.1.14"
+    "jest": "^30.4.2",
+    "mongodb-memory-server": "^11.2.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
   }
 }

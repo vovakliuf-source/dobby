@@ -1,21 +1,20 @@
 const User = require('../models/users');
 const crypto = require('node:crypto');
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
 const catchAsync = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/errorHandler');
 const sendTokenResponse = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
-exports.registerUser = catchAsync(async (req, res) => {
+exports.registerUser = catchAsync(async (req, res, next) => {
   const { name, email, password, role } = req.body;
-
     // Check if user already exists
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({ message: 'User already exists' });
+      throw new ErrorHandler('User already exists', 400);
     }
-
+    if (!name || !email || !password) {
+      throw new ErrorHandler('Please provide name, email, and password', 400);
+    }
     // Create new user
     user = await User.create({
       name,
@@ -30,10 +29,14 @@ exports.registerUser = catchAsync(async (req, res) => {
 exports.loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
+    if (!email || !password) {
+      return next(new ErrorHandler('Please provide email and password', 400));
+    }
     // Check if user exists
     const user = await User.findOne({ email }).select('+password');
+    
     if (!user) {
-      return next(new ErrorHandler('Invalid credentials', 400));
+      return next(new ErrorHandler('User not found', 400));
     }
 
     // Check password

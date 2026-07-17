@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const PORT = process.env.PORT || 3000;
 const connectDb = require('./config/database');
 const errorMiddleware = require('./middleware/error');
@@ -24,6 +23,8 @@ process.on('uncaughtException', (err) => {
     process.exit(1);
 })
 
+const app = express();
+
 connectDb();
 
 // Middleware to make req.query mutable for nested query parameters xssclean and mongoSanitize
@@ -36,11 +37,10 @@ app.use((req, res, next) => {
     });
     next();
 });
-
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
-app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
 app.use(mongoSanitize());
@@ -80,3 +80,5 @@ process.on('unhandledRejection', (err) => {
         process.exit(1);
     });
 });
+
+module.exports = app;

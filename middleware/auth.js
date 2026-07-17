@@ -6,6 +6,10 @@ const ErrorHandler = require('../utils/errorHandler');
 exports.isAuthenticated = catchAsyncErrors(async (req, res, next) => {
     let token;
 
+    if (!req.headers.authorization?.startsWith('Bearer')) {
+        return next(new ErrorHandler('Missing authorization header', 401));
+    }
+
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }

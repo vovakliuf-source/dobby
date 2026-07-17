@@ -17,7 +17,8 @@ const sendEmail = async (options) => {
     text: options.message,
   };
 
-  await transporter.sendMail(mailOptions);
+  const response = transporter.sendMail(mailOptions);
+  return response;
 };
 
 module.exports = sendEmail;

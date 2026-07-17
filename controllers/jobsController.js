@@ -19,16 +19,22 @@ exports.getJobs = CatchAsyncErrors(async (req, res) => {
     });
 })
 // Create new job
-// CatchAsyncErrors is useless code works fine without it.
-exports.newJob = CatchAsyncErrors(async (req, res) => {
-    const job = await new Job({ ...req.body, user: req.user.id });
-    const savedJob = await job.save();
+exports.createJob = CatchAsyncErrors(async (req, res) => {
+    try {
+        const savedJob = await new Job({ ...req.body, user: req.user.id }).save();
 
-    res.status(200).json({
-        success: true,
-        message: 'Job created successfully',
-        data: savedJob
-    });
+        res.status(201).json({
+            success: true,
+            message: 'Job created successfully',
+            data: savedJob
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: 'Failed to create job',
+            error: error.message
+        });
+    }
 })
 // Get jobs within a radius
 exports.getJobInRadius = CatchAsyncErrors(async (req, res) => {

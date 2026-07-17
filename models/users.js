@@ -47,6 +47,7 @@ userSchema.pre('save', async function () {
   }
   // Hash password before saving
   const salt = await bcrypt.genSalt(10);
+  
   this.password = await bcrypt.hash(this.password, salt);
 });
 
@@ -54,6 +55,7 @@ userSchema.methods.getJwtToken = async function () {
   const token = jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+  
   return token;
 };
 
