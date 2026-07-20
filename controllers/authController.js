@@ -7,45 +7,45 @@ const sendEmail = require('../utils/sendEmail');
 
 exports.registerUser = catchAsync(async (req, res, next) => {
   const { name, email, password, role } = req.body;
-    // Check if user already exists
-    let user = await User.findOne({ email });
-    if (user) {
-      throw new ErrorHandler('User already exists', 400);
-    }
-    if (!name || !email || !password) {
-      throw new ErrorHandler('Please provide name, email, and password', 400);
-    }
-    // Create new user
-    user = await User.create({
-      name,
-      email,
-      password,
-      role,
-    });
+  // Check if user already exists
+  let user = await User.findOne({ email });
+  if (user) {
+    throw new ErrorHandler('User already exists', 400);
+  }
+  if (!name || !email || !password) {
+    throw new ErrorHandler('Please provide name, email, and password', 400);
+  }
+  // Create new user
+  user = await User.create({
+    name,
+    email,
+    password,
+    role,
+  });
 
-    sendTokenResponse(user, 201, res);
+  sendTokenResponse(user, 201, res);
 });
 
 exports.loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-    if (!email || !password) {
-      return next(new ErrorHandler('Please provide email and password', 400));
-    }
-    // Check if user exists
-    const user = await User.findOne({ email }).select('+password');
+  if (!email || !password) {
+    return next(new ErrorHandler('Please provide email and password', 400));
+  }
+  // Check if user exists
+  const user = await User.findOne({ email }).select('+password');
     
-    if (!user) {
-      return next(new ErrorHandler('User not found', 400));
-    }
+  if (!user) {
+    return next(new ErrorHandler('User not found', 400));
+  }
 
-    // Check password
-    const isMatch = await user.isPasswordMatched(password);
-    if (!isMatch) {
-      return next(new ErrorHandler('Invalid credentials', 400));
-    }
+  // Check password
+  const isMatch = await user.isPasswordMatched(password);
+  if (!isMatch) {
+    return next(new ErrorHandler('Invalid credentials', 400));
+  }
 
-    sendTokenResponse(user, 200, res);
+  sendTokenResponse(user, 200, res);
 });
 
 exports.logoutUser = catchAsync(async (req, res,) => {
@@ -114,4 +114,4 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   sendTokenResponse(user, 200, res);
-})
+});

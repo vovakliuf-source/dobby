@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.34% </span>
+                <span class="strong">60.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/46</span>
+                <span class='fraction'>28/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>3/9</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">54.34% </span>
+                <span class="strong">60.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/46</span>
+                <span class='fraction'>28/46</span>
             </div>
         
             
@@ -111,52 +111,52 @@
 <a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span></td><td class="text"><pre class="prettyprint lang-js">const ErrorHandler = require('../utils/errorHandler');
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span></td><td class="text"><pre class="prettyprint lang-js">const ErrorHandler = require('../utils/errorHandler');
 &nbsp;
 module.exports = (err, req, res, next) =&gt; {
-    err.statusCode = err.statusCode<span class="branch-0 cbranch-no" title="branch not covered" > || 500;</span>
+    err.statusCode = err.statusCode || 500;
     err.message = err.message<span class="branch-0 cbranch-no" title="branch not covered" > || 'Internal Server Error';</span>
     if (process.env.NODE_ENV === 'development') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        res.status(err.statusCode).json({</span>
@@ -167,10 +167,10 @@ module.exports = (err, req, res, next) =&gt; {
 <span class="cstat-no" title="statement not covered" >        });</span>
     } else {
         // Wrong mongoose ObjectId error
-        if (err.name === 'CastError') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >            const message = `Resource not found. Invalid: ${err.path}`;</span>
-<span class="cstat-no" title="statement not covered" >            err = new ErrorHandler(message, 404);</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
+        if (err.name === 'CastError') {
+            const message = `Resource not found. Invalid: ${err.path}`;
+            err = new ErrorHandler(message, 404);
+        }
 &nbsp;
         // Validation error
         if (err.name === 'ValidationError') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
@@ -205,7 +205,7 @@ module.exports = (err, req, res, next) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-17T13:12:22.285Z
+                at 2026-07-20T12:56:50.923Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.29% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>121/134</span>
+                <span class='fraction'>134/134</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.29% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>121/134</span>
+                <span class='fraction'>134/134</span>
             </div>
         
             
@@ -311,22 +311,22 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const mongoose = require('mongoose');
@@ -444,22 +444,22 @@ const jobSchema = new mongoose.Schema({
 });
 &nbsp;
 jobSchema.pre('save', async function() {
-<span class="cstat-no" title="statement not covered" >    this.slug = await slugify(this.title, { lower: true });</span>
+    this.slug = await slugify(this.title, { lower: true });
 });
 &nbsp;
 jobSchema.pre('save', async function() {
-<span class="cstat-no" title="statement not covered" >    const loc = await geoCoder.geocode({ address: this.address, limit: 5, countryCode: 'fr', minConfidence: 0.3 });</span>
-<span class="cstat-no" title="statement not covered" >    if (loc.length &gt; 0) {      </span>
-<span class="cstat-no" title="statement not covered" >    this.location = {</span>
-<span class="cstat-no" title="statement not covered" >        type: 'Point',</span>
-<span class="cstat-no" title="statement not covered" >        coordinates: [loc[0].longitude, loc[0].latitude],</span>
-<span class="cstat-no" title="statement not covered" >        formattedAddress: loc[0].formattedAddress,</span>
-<span class="cstat-no" title="statement not covered" >        city: loc[0].city,</span>
-<span class="cstat-no" title="statement not covered" >        state: loc[0].stateCode,</span>
-<span class="cstat-no" title="statement not covered" >        zipcode: loc[0].zipcode,</span>
-<span class="cstat-no" title="statement not covered" >        country: loc[0].countryCode</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+    const loc = await geoCoder.geocode({ address: this.address, limit: 5, countryCode: 'fr', minConfidence: 0.3 });
+    if (loc.length &gt; 0) {      
+    this.location = {
+        type: 'Point',
+        coordinates: [loc[0].longitude, loc[0].latitude],
+        formattedAddress: loc[0].formattedAddress,
+        city: loc[0].city,
+        state: loc[0].stateCode,
+        zipcode: loc[0].zipcode,
+        country: loc[0].countryCode
+    }
+  }
 });
 &nbsp;
 module.exports = mongoose.model('Job', jobSchema);</pre></td></tr></table></pre>
@@ -469,7 +469,7 @@ module.exports = mongoose.model('Job', jobSchema);</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-07-17T13:12:22.285Z
+                at 2026-07-20T12:56:50.923Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

@@ -19,9 +19,9 @@ dotenv.config({ path: './config/config.env' });
 
 // Must be at the top of the file to catch errors in other files
 process.on('uncaughtException', (err) => {
-    console.error(`Uncaught Exception: ${err.message}`);
-    process.exit(1);
-})
+  console.error(`Uncaught Exception: ${err.message}`);
+  process.exit(1);
+});
 
 const app = express();
 
@@ -29,13 +29,13 @@ connectDb();
 
 // Middleware to make req.query mutable for nested query parameters xssclean and mongoSanitize
 app.use((req, res, next) => {
-    Object.defineProperty(req, 'query', {
-        value: { ...req.query },
-        writable: true,
-        configurable: true,
-        enumerable: true,
-    });
-    next();
+  Object.defineProperty(req, 'query', {
+    value: { ...req.query },
+    writable: true,
+    configurable: true,
+    enumerable: true,
+  });
+  next();
 });
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,9 +48,9 @@ app.use(xssClean());
 app.use(hpp({whitelist: ['industry', 'jobType', 'minEducation', 'experience', 'positions']})); // Allow duplicate query parameters for filtering
 
 app.use(requestRateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minutes
-    max: 100, // Limit each IP to 100 requests per windowMs
-    message: 'Too many requests from this IP, please try again after 10 minutes'
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again after 10 minutes'
 }));
 
 app.set('query parser', 'extended'); // To support nested query parameters like ?price[gt]=1000
@@ -64,7 +64,7 @@ app.use('/api/v1', authRouter);
 app.use('/api/v1', jobsRouter);
 app.use('/api/v1', userRouter);
 app.all('/*splat', (req, res, next) => {
-    next(new ErrorHandler(`Can't find on this server`, 404));
+  next(new ErrorHandler('Can\'t find on this server', 404));
 });
 
 // Error middleware
@@ -75,10 +75,10 @@ const server = app.listen(PORT, () => {
 });
 
 process.on('unhandledRejection', (err) => {
-    console.error(`Unhandled Rejection: ${err.message}`);
-    server.close(() => {
-        process.exit(1);
-    });
+  console.error(`Unhandled Rejection: ${err.message}`);
+  server.close(() => {
+    process.exit(1);
+  });
 });
 
 module.exports = app;
