@@ -14,7 +14,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const path = require('path');
-const path = require('path');
 
 dotenv.config({ path: './config/config.env' });
 
