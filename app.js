@@ -14,6 +14,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const path = require('path');
+const path = require('path');
 
 dotenv.config({ path: './config/config.env' });
 
@@ -59,6 +60,7 @@ const jobsRouter = require('./routes/jobRouter');
 const authRouter = require('./routes/authRouter');
 const userRouter = require('./routes/userRouter');
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', authRouter);
 app.use('/api/v1', jobsRouter);
