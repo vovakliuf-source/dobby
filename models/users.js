@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: {
-        values: ['admin', 'user', 'employer'],
-        message: 'Role must be either admin or user'
+      values: ['admin', 'user', 'employer'],
+      message: 'Role must be either admin or user'
     },
     required: [true, 'Role is required'],
     default: 'user',
@@ -47,6 +47,7 @@ userSchema.pre('save', async function () {
   }
   // Hash password before saving
   const salt = await bcrypt.genSalt(10);
+  
   this.password = await bcrypt.hash(this.password, salt);
 });
 
@@ -54,6 +55,7 @@ userSchema.methods.getJwtToken = async function () {
   const token = jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+  
   return token;
 };
 

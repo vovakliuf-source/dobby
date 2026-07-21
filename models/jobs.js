@@ -61,7 +61,7 @@ const jobSchema = new mongoose.Schema({
       message: 'Please select correct options for industry'
     }      
   },
-    jobType: {
+  jobType: {
     type: String,
     required: [true, 'Job type is required'],
     enum: {
@@ -69,65 +69,65 @@ const jobSchema = new mongoose.Schema({
       message: 'Please select correct options for job type'
     }
   },
-    minEducation: {
-        type: String,
-        required: [true, 'Minimum education is required'],
-        enum: {
-            values: ['Bachelors', 'Masters', 'PhD'],
-            message: 'Please select correct options for minimum education'
-        }
-    },
-    positions: {
-        type: Number,
-        default: 1
-    },
-    experience: {
-        type: String,
-        required: [true, 'Experience is required'],
-        enum: {
-            values: ['No experience', '1 year', '2 years', '3 years', '4 years', '5+ years'],
-            message: 'Please select correct options for experience'
-        }
-    },
-    salary: {
-        type: Number,
-        required: [true, 'Salary is required']
-    },
-    postingDate: {
-        type: Date,
-        default: Date.now
-    },
-    lastDate: {
-        type: Date,
-        default: new Date().setDate(new Date().getDate() + 7) // Default to 30 days from now
-    },
-    applicantsApplied: {
-        type: [Object],
-        select: false
-    },
-    user: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User',
-        required: true
+  minEducation: {
+    type: String,
+    required: [true, 'Minimum education is required'],
+    enum: {
+      values: ['Bachelors', 'Masters', 'PhD'],
+      message: 'Please select correct options for minimum education'
     }
+  },
+  positions: {
+    type: Number,
+    default: 1
+  },
+  experience: {
+    type: String,
+    required: [true, 'Experience is required'],
+    enum: {
+      values: ['No experience', '1 year', '2 years', '3 years', '4 years', '5+ years'],
+      message: 'Please select correct options for experience'
+    }
+  },
+  salary: {
+    type: Number,
+    required: [true, 'Salary is required']
+  },
+  postingDate: {
+    type: Date,
+    default: Date.now
+  },
+  lastDate: {
+    type: Date,
+    default: new Date().setDate(new Date().getDate() + 7) // Default to 30 days from now
+  },
+  applicantsApplied: {
+    type: [Object],
+    select: false
+  },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
+  }
 });
 
 jobSchema.pre('save', async function() {
-    this.slug = await slugify(this.title, { lower: true });
+  this.slug = await slugify(this.title, { lower: true });
 });
 
 jobSchema.pre('save', async function() {
-    const loc = await geoCoder.geocode({ address: this.address, limit: 5, countryCode: 'fr', minConfidence: 0.3 });
-    if (loc.length > 0) {      
+  const loc = await geoCoder.geocode({ address: this.address, limit: 5, countryCode: 'fr', minConfidence: 0.3 });
+  if (loc.length > 0) {      
     this.location = {
-        type: 'Point',
-        coordinates: [loc[0].longitude, loc[0].latitude],
-        formattedAddress: loc[0].formattedAddress,
-        city: loc[0].city,
-        state: loc[0].stateCode,
-        zipcode: loc[0].zipcode,
-        country: loc[0].countryCode
-    }
+      type: 'Point',
+      coordinates: [loc[0].longitude, loc[0].latitude],
+      formattedAddress: loc[0].formattedAddress,
+      city: loc[0].city,
+      state: loc[0].stateCode,
+      zipcode: loc[0].zipcode,
+      country: loc[0].countryCode
+    };
   }
 });
 

@@ -11,7 +11,7 @@ router.route('/users').get(isAuthenticated, authorizeRoles('admin'), getAllUsers
 router.route('/password/update').put(isAuthenticated, updateUserPassword);
 router.route('/profile/update').put(isAuthenticated, updateUserProfile);
 
-router.route('/profile/delete').delete(isAuthenticated, deleteUser)
+router.route('/profile/delete').delete(isAuthenticated, deleteUser);
 router.route('/user/:id').delete(isAuthenticated, authorizeRoles('admin'), deleteUserByAdmin);
 
 module.exports = router;
